@@ -3,6 +3,7 @@ const chalk = require('chalk')
 const moment = require('moment-timezone')
 const fs = require('fs')
 const os = require('os')
+const express = require('express')
 const speed = require('performance-now')
 const util = require('util')
 const { exec, execSync } = require('child_process')
@@ -939,3 +940,15 @@ fs.watchFile(file, () => {
   delete require.cache[file]
   require(file)
 })
+
+const app = express()
+app.get('/', (req, res) => {
+  res.send('OK: Bot jalan normal 🚀')
+})
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Uptime server jalan di port ${PORT}`)
+})
+
+// Jalankan bot
+bot.launch()
