@@ -1,6 +1,7 @@
 require("./setting")
 const { Telegraf } = require("telegraf")
 const fs = require("fs")
+const express = require('express')
 const chalk = require('chalk')
 const moment = require("moment-timezone")
 const yargs = require('yargs/yargs')
@@ -770,15 +771,14 @@ startronzz()
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
 
-// Tambahan agar Replit tetap hidup
-const express = require("express");
-const app = express();
-const port = 3000;
+const app = express()
+app.get('/', (req, res) => {
+  res.send('OK: Bot jalan normal 🚀')
+})
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Uptime server jalan di port ${PORT}`)
+})
 
-app.get("/", (req, res) => {
-  res.send("Bot Telegram saya masih hidup 🚀");
-});
-
-app.listen(port, () => {
-  console.log(`Server heartbeat aktif di port ${port}`);
-});
+// Jalankan bot
+bot.launch()
