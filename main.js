@@ -769,3 +769,16 @@ startronzz()
 
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
+// Tambahan agar Replit tetap hidup
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Bot Telegram saya masih hidup 🚀");
+});
+
+app.listen(port, () => {
+  console.log(`Server heartbeat aktif di port ${port}`);
+});
